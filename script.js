@@ -1,17 +1,13 @@
-// script.js
-
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Smooth Scrolling for Navigation Links
     document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault(); // Prevent default jump behavior
+            e.preventDefault();
 
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
 
             if (targetElement) {
-                // Calculate offset to account for fixed header
                 const headerOffset = document.querySelector('.site-header').offsetHeight;
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
@@ -24,16 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Dynamic Content Loading for "Explore More Articles"
     const loadArticlesBtn = document.getElementById('loadArticlesBtn');
     const articlesContainer = document.getElementById('articlesContainer');
 
-    // Array of dummy article data
     const articlesData = [
         {
             title: "Aerodynamics: Shaping the Wind",
             description: "How a car's exterior is meticulously shaped to slice through the air, reducing drag and increasing efficiency.",
-            link: "#" // In a real app, this would be a link to the full article
+            link: "#"
         },
         {
             title: "The Evolution of Headlight Design",
@@ -67,10 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    let articlesLoaded = 0; // Keep track of how many articles have been loaded
+    let articlesLoaded = 0;
 
     const loadMoreArticles = () => {
-        const numToLoad = 3; // Load 3 articles at a time
+        const numToLoad = 3;
         const endIndex = articlesLoaded + numToLoad;
 
         for (let i = articlesLoaded; i < endIndex && i < articlesData.length; i++) {
@@ -86,12 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
             articlesContainer.appendChild(articleCard);
         }
 
-        articlesLoaded = endIndex; // Update the count of loaded articles
+        articlesLoaded = endIndex;
 
-        // Hide the button if all articles have been loaded
-        if (loadArticlesBtn && articlesLoaded >= articlesData.length) { // Added null check for loadArticlesBtn
+        if (loadArticlesBtn && articlesLoaded >= articlesData.length) {
             loadArticlesBtn.style.display = 'none';
-            // Optionally, add a message
             const noMoreMsg = document.createElement('p');
             noMoreMsg.textContent = "That's all for now! Check back for more.";
             noMoreMsg.style.textAlign = 'center';
@@ -101,9 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Load initial articles when the page loads (optional, but good UX)
     if (loadArticlesBtn) {
-        loadMoreArticles(); // Load some articles on initial page load
+        loadMoreArticles();
         loadArticlesBtn.addEventListener('click', loadMoreArticles);
     }
 });
