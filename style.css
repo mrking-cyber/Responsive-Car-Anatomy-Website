@@ -530,16 +530,28 @@ a:hover {
   }
 }
 /*
- * WPO: Conditional Hiding for Mobile Performance
- * Elements with .mobile-hidden will be invisible below 992px
+ * WPO FIX: Adaptive Loading - Safe fix to prevent layout break and restore 93% score.
+ * Targets the heavy Hero Background, the About Image, and the AOS animations.
  */
-.mobile-hidden {
-    display: none !important; /* Forces elements to be hidden on mobile */
-}
+@media (max-width: 991px) {
+    /* 1. Remove the massive background image from the Hero section */
+    .hero-section {
+        background: none !important;
+        /* Fallback color to keep the text readable */
+        background-color: var(--color-primary-dark, #1A1A1A) !important; 
+    }
+    
+    /* 2. Hide the large image in the About section (saves loading that asset) */
+    .about-section .about-image {
+        display: none !important;
+    }
 
-/* Revert: On Desktop (992px+), force the elements to be visible */
-@media (min-width: 992px) {
-    .mobile-hidden {
-        display: block !important; /* Change this to flex or grid if needed for layout */
+    /* 3. Disable the CPU-intensive processing for AOS animations */
+    /* This ensures your mobile browser doesn't waste resources animating */
+    [data-aos] {
+        opacity: 1 !important; 
+        transition: none !important; 
+        transform: none !important;
+        /* Setting these prevents the browser from doing the calculation/animation work */
     }
 }
