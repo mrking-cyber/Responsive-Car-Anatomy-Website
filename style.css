@@ -529,3 +529,17 @@ a:hover {
     grid-template-columns: 1fr;
   }
 }
+/*
+ * WPO: Conditional Hiding for Mobile Performance
+ * Elements with .mobile-hidden will be invisible below 992px
+ */
+.mobile-hidden {
+    display: none !important; /* Forces elements to be hidden on mobile */
+}
+
+/* Revert: On Desktop (992px+), force the elements to be visible */
+@media (min-width: 992px) {
+    .mobile-hidden {
+        display: block !important; /* Change this to flex or grid if needed for layout */
+    }
+}
