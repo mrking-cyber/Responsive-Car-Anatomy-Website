@@ -160,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
             easing: 'ease-in-out',
             once: true,
         });
-    }
+}
     // ------------------------------------------
-
 });
